@@ -2,11 +2,15 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const menuRoutes = require('./routes/menu');
+const cors = require('cors'); // Thêm cors
 
 const app = express();
+
+// Thêm middleware CORS
+app.use(cors());
+
 app.use(express.json());
 
-// Kết nối MongoDB mà không cần các tùy chọn deprecated
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
